@@ -1,0 +1,495 @@
+.row{
+	width:100%;
+	float:left;
+	min-height: 1px;
+    font-family: 'Lato';
+}
+
+.column{
+	display: inline-block;
+	float: left;
+	min-height: 20px;
+    font-family: 'Lato';
+    
+    margin-left:15px;
+    margin-right:15px;
+}
+
+.column.four{
+	width: 100%;    
+}
+.column.three{
+	width: 70%;
+}
+.column.two{
+	width: 50%;
+    min-width:250px;
+}
+.column.one{
+	width: 18%;
+    float: left;
+    min-width: 125px;
+}
+
+.activeTab{
+    color:cornflowerblue !important;
+}
+
+.storyItem:hover{
+    box-shadow: 1px 1px 1px 1px lightgray;
+}
+
+#headMenu{
+    width:100%;
+    min-height:8%;
+    color: #9E9E9E;
+    background-color: white;
+}
+
+.menuItem{
+    float: left;
+    min-width: 80px;
+    height: 35px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;    
+    color: #9E9E9E;
+}
+
+.pageSelect{
+    float: left;
+    margin: 2%;
+    margin-left: 15%;
+    font-family: 'Lato', sans-serif;
+    font-size: 80%;
+}
+
+.menuItem:hover{
+    background-color: white;
+    color:cornflowerblue;
+    border-radius: 30%;
+}
+
+#menuItemsGroup{
+    float:right;
+    padding: 1%;
+    width:30%;
+}
+
+.profileMenu{
+    height: 40%;
+    background-image: url("http://hopchurch.com/wp-content/uploads/2015/06/laptop-and-camera-lens-photography-hd-wallpaper-1920x1200-22116-1200x440.jpg");
+    background-size: cover;
+}
+
+.userInfo{
+    min-height: 20%;
+    background-color: rgba(154, 164, 168, 0.09);;
+}
+
+.userInfoLabel {    
+    font-family: 'Lato', sans-serif;
+    font-size: 70%;
+}
+.userCaption{
+    min-height: 4%;
+    border-bottom: 1px solid rgba(176, 176, 176, 0.2);
+    color:#b0b0b0;
+}
+
+.profilePic {
+    background: rgba(0,0,0,.5);
+    margin: auto;
+    width: 0px;
+    height: 0px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+
+.Img {
+    background: url(http://www.mycustomer.com/sites/all/themes/pp/img/default-user.png);
+    background-size: contain;
+    z-index: 9999;
+    position: relative;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: cubic-bezier(.34,.43,0,1.02) 0.2s;
+    -moz-transition: cubic-bezier(.34,.43,0,1.02) 0.2s;
+    transition: cubic-bezier(.34,.43,0,1.02) 0.2s;
+    box-shadow: 0px 0px 0px 2pt transparent;
+    border: 0px solid #FFF;
+    margin: auto;
+    cursor: pointer;
+    background-size: cover;
+    width:150px;
+    height:150px;
+    position: relative;
+    top:-90px;
+}
+
+
+.profilePic:hover{
+    opacity: 0.9;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+}
+
+.Img:hover{
+    opacity: 0.5;
+}
+
+.yourstory{
+    font-family: 'Lato', sans-serif;
+    border: 1px solid #e4e2e2;
+    min-height: 15%;
+    margin:2%;
+    padding: 1%;
+}
+
+.yourStoryContent{
+    font-size: x-small;
+    color: #474747;
+    min-height:15%;
+    max-height: 15%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+.yourStoryLine{
+    min-height: 5%;
+    float: right;
+    width: 100%;
+}
+
+.readMore{
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+    color: #a4a4a7;
+    cursor: pointer;
+    font-size: xx-small;
+    float: right;
+    min-height: 10px;
+}
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.rating{
+    color: burlywood;
+}
+
+.hystorySideBar{
+    border: white;
+    background-color: white;
+    color: #474747;
+    padding: 10px;
+    border-left: 1px solid rgba(211, 211, 211, 0.51);
+    border-right: 1px solid rgba(211, 211, 211, 0.51);
+    box-shadow: 1px 2px 2px 0px rgba(211, 211, 211, 0.78);
+}
+
+
+.hyStoryCaption{
+    font-family: "Lato";
+    background-color: white;
+    color: #474747;
+    width: 100%;
+    min-height: 1%;
+    border-bottom: 1px solid;
+}
+
+.storyItem{
+    width: 100%;
+    min-height: 10%;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.27);;
+    cursor: pointer;
+}
+
+.storyImg{
+    width: 30%;
+    height: 10%;
+    background-size: cover;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-size: cover;
+    background-image: url(http://www.rd.com/wp-content/uploads/sites/2/2015/08/october-2015-I-wish-my-teacher-knew.jpg);
+}
+
+.storyImg2{
+    width: 30%;
+    height: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-size: cover;
+    float: left;
+    background-image: url(http://listverse.com/wp-content/uploads/2008/10/250px-isabel-la-catolica-2.jpg);
+}
+
+.storyImg3{   
+    width: 30%;
+    height: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-size: cover;
+    float: left;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg);
+}
+
+.storyImg4{
+    width: 30%;
+    height: 10%;    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-size: cover;
+    float: left;
+    background-image: url(http://watchmojo.com/uploads/blipthumbs/PH-H-Top10-Most-Famous-Queens-In-History-480p30_480.jpg);
+}
+
+.storyText{
+   font-size: x-small;
+    width: 50%;
+    height: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    margin-left: 5px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.history{
+    color: #474747;;
+    box-shadow: 2px 3px 2px 1px lightgray;
+}
+
+.hystoryImg{
+    width: 100%;
+    background-image: url(https://durhamcountylibrary.org/exhibits/dcrhp/images/cr037.jpg);
+    height: 60%;
+    background-size: cover;
+}
+
+.historyContent{
+    padding: 15px;
+}
+
+.hystoriestab{
+    background-color: #f7f7f7;
+}
+.hyStoryLine{
+    min-height: 10%;
+    height: 10%;
+    float: right;
+    width: 100%;
+    background-color: white;
+    color: #9E9E9E;
+    border-top: 1px solid rgba(158, 158, 158, 0.36);
+}
+
+.hyStory{
+    background-color: white;
+}
+
+.usersImg{
+    width: 5%;
+    float: left;
+    height: 100%;
+    background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSWBbf7xKVbM2LaMvUkL-bxgz1pvVUMB_4KwDSrJ5Ez1J9xnxGJ);
+    background-size: cover;
+}
+
+.userName{
+    width: 5%;
+    float: left;
+}
+
+.newsImg{
+    width: 100%;
+    height: 40%;
+    background-image: url(http://primocat.com/img/media/subpage_banner_latest_news.jpg);
+    background-size: cover;
+}
+
+.newsItem{
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.newsItem:hover{
+    box-shadow: 6px 4px 5px rgba(0, 0, 0, .2);
+}
+
+.newstab{
+    background-color: #f7f7f7;
+}
+
+input[type=text] {
+   width: 130px;
+    box-sizing: border-box;
+    border: none;
+    font-size: x-small;
+    background-image: url(http://www.clipartkid.com/images/775/search-icon-clip-art-at-clker-com-vector-clip-art-online-royalty-643l5L-clipart.png);
+    background-color: white;
+    background-size: contain;
+    background-position: 2px 2px;
+    background-repeat: no-repeat;
+    padding: 5px 5px 5px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+    border: none;
+    background-color: ebf1f7;
+    outline: none;
+}
+
+
+.infoRow{
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    box-shadow: 1px 1px 1px lightgray
+}
+
+.smallImg{
+    display: none;
+}
+
+@media screen and (max-width:300px) {
+  
+    .hystorySideBar{
+        display: none;
+    }
+    
+    #menuItemsGroup{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:400px) {
+  
+    .hystorySideBar{
+        display: none;
+    }
+    
+    .yourstory{
+        width: 100% !important;
+    }
+}
+
+
+@media screen and (max-width:500px) {
+    .Img {
+        width: 40px;
+        height: 40px;
+        top:-25px;
+    }
+    
+    .yourstory{
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .Img {
+        width: 40px;
+        height: 40px;
+        top:-35px;
+        display: block !important;
+    }
+    .hystorySideBar{
+        display: none;
+    }
+    .column.three{
+        width: 100%;
+    }
+    #menuItemsGroup{
+        width: 100%;
+    }
+    .yourStories{
+        width: 98% !important;
+        margin-left:0px !important;
+    }
+    
+    .userInfos{
+        display: none;
+        margin-left:0px !important;
+    }
+    
+    .yourstory{
+        margin-left: 0px !important;
+    }
+    
+    .userinfo{
+        background-color: transparent;
+        min-height: 5px !importnat;
+        margin-bottom: 10px;
+        height: 5px;
+    }
+    
+    .smallImg {
+        display: block;
+        background: url(http://www.mycustomer.com/sites/all/themes/pp/img/default-user.png);
+        background-size: contain;
+        z-index: 9999;
+        position: relative;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-transition: cubic-bezier(.34,.43,0,1.02) 0.2s;
+        -moz-transition: cubic-bezier(.34,.43,0,1.02) 0.2s;
+        transition: cubic-bezier(.34,.43,0,1.02) 0.2s;
+        box-shadow: 0px 0px 0px 2pt transparent;
+        border: 0px solid #FFF;
+        margin: auto;
+        cursor: pointer;
+        background-size: cover;
+        width:150px;
+        height:150px;
+        position: relative;
+        top:-90px;
+    }
+    
+    .smallImg:hover{
+        opacity: 0.5;
+    }
+}
+
+
+@media screen and (max-width:1100px) {
+    .Img {
+        width: 70px;
+        height: 70px;
+        top:-35px;
+    }
+}
+
+
+

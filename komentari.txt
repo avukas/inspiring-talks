@@ -1,0 +1,23 @@
+I Ureadeno:
+-tri page, responzivna i na malim ekranima
+-mockovi i za male ekrane i velike
+-grid view stranica
+-implementiran meni
+-izgled je konzistentan i sve je poravnato
+-koristen media query za male ekrane
+
+II -
+III-
+IV -
+
+Lista fajlova:
+style.css
+-css stil svih stranica,
+index.html - htm user profile page-a
+
+
+Slike:
+sadrze mockup-e stranica, slike koje opisuju
+izgled stranica na mobilnim uredajima imaju
+sufix 'mob'
+
