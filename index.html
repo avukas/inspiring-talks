@@ -8,14 +8,14 @@
 <BODY>
 	<div class="row" id="headMenu">
         <div id="menuItemsGroup">
-            <a href="History.html">
-                <div class="menuItem" id="hyStoriesPage">History</div>
+            <a onclick="pageTabOnClick('History.html')">
+                <div class="menuItem" id="History">History</div>
             </a>
-            <a href="news.html">
-                <div class="menuItem" id="newsPage">News</div>
+            <a onclick="pageTabOnClick('News.html')">
+                <div class="menuItem" id="News">News</div>
             </a>
-            <a href="index.html">
-                <div class="menuItem activeTab">My page</div>
+            <a onclick="pageTabOnClick('index.html')">
+                <div class="menuItem activeTab" id="index">My page</div>
             </a>
         </div>
     </div>
@@ -59,6 +59,35 @@
             </div>
         </div>
         <div class="column two yourStories">
+            <div class="row writeStoryRow">
+                <i class="fa fa-pencil-square-o" style="cursor:pointer; margin-bottom:10px;" onclick='unhideEdit()' aria-hidden="true"></i> Write a story
+            </div>
+            <div class="row" id="writeStory" style="display:none;">
+                <div>
+                    <label class="storyLabel">Select story category</label>
+                    <select class="storySelect" id="categorySelect">                          
+                      <option value=""></option>
+                      <option value="bussiness">Bussiness</option>
+                      <option value="politics">Politics</option>
+                      <option value="art">Art</option>
+                      <option value="technology">Technology</option>
+                    </select>
+                </div>
+                 <div>
+                    <label class="storyLabel">Select news category</label>
+                    <select class="storySelect" id="newsCategory">
+                      <option value=""></option>
+                      <option value="history">History</option>
+                      <option value="news">News</option>
+                    </select>
+                </div>            
+                <textarea id="storyArea" placeholder="Write your story here" ></textarea>
+                 <button onclick="validate()" name="save" class="storyButton">Save</button>
+                 <div id="validationMessageDiv">
+                     <i class="fa fa-times" style="cursor:pointer" aria-hidden="true" onclick="hideValidationMessage()"></i>
+                     <label id="validationMessage"></label>
+                 </div>     
+            </div>
             <div class="row yourstory">
                 <div class="yourStoryCaption">Story one</div>
                 <div class="yourStoryContent" id="yourStoryContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie lorem magna, sed ullamcorper est ornare eget. Mauris gravida urna eget orci auctor faucibus. Morbi et consectetur libero. Phasellus non placerat arcu. Cras at accumsan ante, eu suscipit lectus. Nullam laoreet pharetra est, sit amet rutrum leo sodales vel. Nunc rhoncus risus sapien, eu posuere dui malesuada sit amet. Etiam sit amet velit sapien. Integer facilisis lacus id purus fermentum ullamcorper.
@@ -112,4 +141,5 @@ Nullam suscipit libero et aliquet euismod. Phasellus egestas urna vel diam hendr
     </div>
     
 <script src="https://use.fontawesome.com/3c3ce0701a.js"></script>
+<script src="script.js"></script>
 </BODY></HTML>

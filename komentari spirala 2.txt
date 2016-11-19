@@ -1,0 +1,20 @@
+dodana edit forma za dodavanje prica na my page tabu
+dodana dva dropdowna za odabir 
+dodana validacija na polja
+dodana validacijska poruka ispod save button-a
+
+dodana galerija na history page-u
+iz galerije se moze izaci klikom na esc ili sa strane, na modal
+u galeriju se ucitavaju random slike, kada budemo imali backend slike ce se ucitavati iz baze
+kroz slike se prolazi klikanjem lijevo desno
+desna strana slike je potpuno clickable i vodi na sljedecu sliku
+lijeva strana slike je potpuno clickable i vodi na proslu sliku
+
+css na font awesomr iconama nije pisan u klasama, jer se odnosi direktno na tu ikonu i nece se pojavljivati na drugim elementima
+
+uradjen dio pod c. stranice se loadaju ajax-om
+
+dodan novi fajl script.js u kojoj je javascript kod
+
+
+
