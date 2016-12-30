@@ -1,0 +1,3 @@
+uredjeno povlacenje svih stvari, save i search
+
+imala sam problema sa save-om slika, zato ostalo nisam stigla

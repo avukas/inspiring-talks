@@ -206,6 +206,7 @@
     border-left: 1px solid rgba(211, 211, 211, 0.51);
     border-right: 1px solid rgba(211, 211, 211, 0.51);
     box-shadow: 1px 2px 2px 0px rgba(211, 211, 211, 0.78);
+    margin-top: 7px;
 }
 
 
@@ -232,38 +233,7 @@
     float: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-size: cover;
-    background-image: url(http://www.rd.com/wp-content/uploads/sites/2/2015/08/october-2015-I-wish-my-teacher-knew.jpg);
-}
-
-.storyImg2{
-    width: 30%;
-    height: 10%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-size: cover;
-    float: left;
-    background-image: url(http://listverse.com/wp-content/uploads/2008/10/250px-isabel-la-catolica-2.jpg);
-}
-
-.storyImg3{   
-    width: 30%;
-    height: 10%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-size: cover;
-    float: left;
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg);
-}
-
-.storyImg4{
-    width: 30%;
-    height: 10%;    
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-size: cover;
-    float: left;
-    background-image: url(http://watchmojo.com/uploads/blipthumbs/PH-H-Top10-Most-Famous-Queens-In-History-480p30_480.jpg);
+    background-size: cover;    
 }
 
 .storyText{
@@ -286,7 +256,6 @@
 
 .hystoryImg{
     width: 100%;
-    background-image: url(https://durhamcountylibrary.org/exhibits/dcrhp/images/cr037.jpg);
     height: 60%;
     background-size: cover;
     cursor: pointer;
@@ -329,7 +298,6 @@
 .newsImg{
     width: 100%;
     height: 40%;
-    background-image: url(http://primocat.com/img/media/subpage_banner_latest_news.jpg);
     background-size: cover;
 }
 
@@ -348,7 +316,7 @@
     background-color: #f7f7f7;
 }
 
-input[type=text] {
+.search {
    width: 130px;
     box-sizing: border-box;
     border: none;
@@ -363,11 +331,33 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus {
+.search:focus {
     width: 100%;
     border: none;
     background-color: ebf1f7;
     outline: none;
+}
+
+.storyTitle:focus{
+     width: 100%;
+    border: none;
+    background-color: ebf1f7;
+    outline: none;    
+}
+
+.storyTitle {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 130px;
+    box-sizing: border-box;
+    border: none;
+    font-size: small;    
+    background-color: white;
+    background-size: contain;
+    margin-bottom: 7px;
+    border: 1px solid lightgray;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
 
 
@@ -398,10 +388,11 @@ input[type=text]:focus {
 }
 
 .storySelect{
-    border-radius: 10px;
     margin-top: 2px;
     margin-bottom: 10px;
-    width:15%;
+    border-color: lightgray;
+    width:25%;
+    padding: 5px;
 }
 
 .storyLabel{
@@ -422,11 +413,11 @@ input[type=text]:focus {
 }
 
 #storyArea{
-    border-radius: 5px;
     margin-bottom: 10px;
     resize:vertical; 
     min-height:150px; 
     width:100%;
+    border-color: lightgray;
 }
 
 .storyButton {
@@ -607,5 +598,36 @@ textarea:focus,select:focus, input:focus{
     }
 }
 
+.storyForm{
+    border:1px solid lightgray;
+    padding: 10px;
+}
 
+.storyTitle{
+    width: 50.5%;
+}
 
+#selectedImages{
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#loading {
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   position: fixed;
+   display: none;
+   opacity: 0.7;	
+   background-color: #fff;
+   z-index: 99;
+   text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top: 100px;
+  left: 240px;
+  z-index: 100;
+}

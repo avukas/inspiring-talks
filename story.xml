@@ -1,0 +1,75 @@
+<stories>
+	<story>
+		<images>
+			<image>nesto</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+	<story>
+		<images>
+			<image>
+				nesto
+			</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+	<story>
+		<images>
+			<image>nesto</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+	<story>
+		<images>
+			<image>
+				nesto
+			</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+	<story>
+		<images>
+			<image>
+				nesto
+			</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+	<story>
+		<images>
+			<image>
+				nesto
+			</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+	<story>
+		<images>
+			<image>
+				nesto
+			</image>
+		</images>
+		<text>test</text>
+		<title>test title</title>
+		<storycategory>bussiness</storycategory>
+		<newscategory>history</newscategory>
+	</story>
+</stories>
