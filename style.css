@@ -631,3 +631,11 @@ textarea:focus,select:focus, input:focus{
   left: 240px;
   z-index: 100;
 }
+
+.uploadedImages{
+	width:100px; 
+	height:100px; 
+	margin-right:5px; 
+	margin-bottom:5px; 
+	border:1px solid lightgrey;
+}

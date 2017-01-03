@@ -1,50 +1,107 @@
+
+var defaultRoute = "http://localhost:8080/";
+
+window.onload = getStories();
+
+function getElementById(elId){
+	return document.getElementById(elId);
+}
+
+function getElValue(elId){
+	return getElementById(elId).value;
+}
+
+function setElValue(elId,val){
+	getElementById(elId).value = val;
+}
+
+function getElInnerHtml(elId){
+	return getElementById(elId).innerHTML;
+}
+
+function setElInnerHtml(elId,val){
+	getElementById(elId).innerHTML = val;
+}
+
+function getElStyleProp(elId,prop){
+	return getElementById(elId).style[prop]
+}
+
+function setElStyleProp(elId,prop,val){
+	getElementById(elId).style[prop] = val;
+}
+
+function setValidationMessInnerHtml(val){
+	setElInnerHtml('validationMessage',getElInnerHtml('validationMessage') + val);
+}
+
+function showLoadingPanel(){
+	setElStyleProp('loading','display','none');
+}
+
+function hideLoadingPanel(){
+	setElStyleProp('loading','display','none');
+}
+
+function getSrc(elId,src){
+	return getElementById(elId).src;
+}
+
+function setSrc(elId,src){
+	getElementById(elId).src = src;
+}
+
+function hideValidationMessage(){
+     setElStyleProp('validationMessageDiv','display','none');
+}
+
 function unhideEdit() {
     var el = document.getElementById('writeStory');
-    if ( el.style.display === 'block')
-        el.style.display = 'none';
+    if ( getElStyleProp('writeStory','display')=='block')
+        setElStyleProp('writeStory','display', 'none');
     else
-        el.style.display = 'block';
+        setElStyleProp('writeStory','display', 'block');
 }
+
+
 function validate(){
-    document.getElementById('validationMessage').innerHTML = '';
-    document.getElementById('validationMessageDiv').style.display = 'none';
+    setElInnerHtml('validationMessage','');
+    setElStyleProp('validationMessageDiv','display','none');
     
     
-    var catSelect = document.getElementById('categorySelect').value;
-    var newsCategorySelect = document.getElementById('newsCategory').value;
-    var storyArea = document.getElementById('storyArea').value;
-	var title = document.getElementById('storyTitle').value;
-	var files = document.getElementById('fileupload').files;
+    var catSelect = getElValue('categorySelect');
+    var newsCategorySelect = getElValue('newsCategory');
+    var storyArea = getElValue('storyArea');
+	var title = getElValue('storyTitle');
+	var files = getElementById('fileupload').files;
 	
     
     if(catSelect == "")
-        document.getElementById('validationMessage').innerHTML = 'Please select story category.';
+        setValidationMessInnerHtml('Please select story category.');
     if(newsCategorySelect == "")
-        document.getElementById('validationMessage').innerHTML +=' Please select news category.';
+        setValidationMessInnerHtml(' Please select news category.');
     if(storyArea == "")
-        document.getElementById('validationMessage').innerHTML +=' Please fill in story field.';
+        setValidationMessInnerHtml(' Please fill in story field.');
 	if(title == "")
-    	document.getElementById('validationMessage').innerHTML +=' Please fill in title field.';
+    	setValidationMessInnerHtml(' Please fill in title field.');
 	if(files.length == 0)
-    	document.getElementById('validationMessage').innerHTML +=' Please select images.';
+    	setValidationMessInnerHtml(' Please select images.');
 		
-    if( document.getElementById('validationMessage').innerHTML != '')
-       document.getElementById('validationMessageDiv').style.display = 'block';	
+    if( getElInnerHtml('validationMessage') != '')
+       setElStyleProp('validationMessageDiv','display','block');	
 	else{			
 		var story = {
 			storycategory:catSelect,
 			newscategory:newsCategorySelect,
 			text:storyArea,
 			title:title,
-			images:{
-				image:[]
-			}
+			images:[]
 		}
 		for (var i = 0; i < files.length; i ++){	
 			var FR= new FileReader();
 			FR.onload = function(e) {
-				story.images.image.push(e.target.result);			
-				if ( story.images.image.length == files.length) {
+				story.images.push(e.target.result);			
+				if ( story.images.length == files.length) {
 			   		saveStory(story);
 				}
 			};       
@@ -55,44 +112,44 @@ function validate(){
 }
 
 function ClearStory(){
-	document.getElementById('categorySelect').value=0;
-    document.getElementById('newsCategory').value=0;
-    document.getElementById('storyArea').value='';
-	document.getElementById('storyTitle').value='';
-	document.getElementById('fileupload').value="";
-	document.getElementById("selectedImages").innerHTML = "";
+	setElValue('categorySelect',0);
+	setElValue('newsCategory',0);
+	setElValue('storyArea','');
+	setElValue('storyTitle','');
+	setElValue('fileupload','');
+	setElInnerHtml('selectedImages','');
+}
+
+function makePost(postfix, object, _callback){
+	showLoadingPanel();
+	var http = new XMLHttpRequest();
+	var url = defaultRoute + postfix;	
+	http.open('POST', url, true);
+	
+	http.onreadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+			hideLoadingPanel();		
+			_callback(true);			
+		}
+		else if(http.status != 200){
+			hideLoadingPanel();
+			setElInnerHtml('validationMessage','An error occurred while saving story');
+       		setElStyleProp('validationMessageDiv','display','block');	
+		}
+	}
+	http.send(JSON.stringify(object));
 }
 
 function saveStory(story){
-	document.getElementById('loading').style.display = 'block';	
+	var url = "story.php";	
 	
-	var http = new XMLHttpRequest();
-	var url = "http://localhost:8080/story.php";	
-	http.open('POST', url, true);
-
-	http.onreadystatechange = function() {//Call a function when the state changes.
-		if(http.readyState == 4 && http.status == 200) {
-			document.getElementById('loading').style.display = 'none';		
+	story.imagesJSON.stringify(story.images)
+		
+	makePost(url,story,function(success){
+		if(success){
 			ClearStory();
 		}
-		else if(http.status != 200){
-			document.getElementById('loading').style.display = 'none';
-			document.getElementById('validationMessage').innerHTML='An error occurred while saving story';
-       		document.getElementById('validationMessageDiv').style.display = 'block';	
-		}
-	}
-	story.images.image = JSON.stringify(story.images.image)
-	http.send(JSON.stringify(story));
-}
-
-function readFile(file) {
-    var binary = '';
-    var bytes = new Uint8Array( buffer );
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode( bytes[ i ] );
-    }
-    return window.btoa( binary );
+	})		
 }
 
 function uploadedImages() {
@@ -100,65 +157,59 @@ function uploadedImages() {
     var txt = "";
    
     for (var i = 0; i < x.files.length; i++) {
-        txt +="<img style='width:100px; height:100px; margin-right:5px; margin-bottom:5px; border:1px solid lightgrey;' src=" + URL.createObjectURL(x.files[i]) + "></img>";               
+        txt +="<img class='uploadedImages' src=" + URL.createObjectURL(x.files[i]) + "></img>";               
     }   
-    document.getElementById("selectedImages").innerHTML = txt;
+    setElInnerHtml("selectedImages", txt);
 }
 
-function hideValidationMessage(){
-     document.getElementById('validationMessageDiv').style.display = 'none';
-}
+
 
 function openGalery(){
-    document.getElementById('modal').style.display = 'block';
-    document.getElementById('leftGalery').style.display = 'block';
-    document.getElementById('rightGalery').style.display = 'block';
-    document.getElementById('galery').style.display = 'block';
+    setElStyleProp('modal','display','block');	
+    setElStyleProp('leftGalery','display','block');	
+    setElStyleProp('rightGalery','display','block');	
+    setElStyleProp('galery','display','block');	
     document.body.style.overflow = 'hidden';
 }
 
-images = ["https://durhamcountylibrary.org/exhibits/dcrhp/images/cr037.jpg",
-          "https://s-media-cache-ak0.pinimg.com/736x/8e/8b/96/8e8b96542163eddb99859f0b399cf974.jpg",
-          "http://67.media.tumblr.com/c0a71d8534c5e78506df59cec9e662ac/tumblr_n301koKFoF1qbj1sio1_500.jpg",
-          "https://s-media-cache-ak0.pinimg.com/originals/6f/22/12/6f22122d5c52e0cb752a278542ec8012.jpg"]
+function hideGalery() {
+   setElStyleProp('modal','display','none');	
+    setElStyleProp('leftGalery','display','none');	
+    setElStyleProp('rightGalery','display','none');	
+    setElStyleProp('galery','display','none');	
+    document.body.style.overflow = 'hidden';
+}
 
-i = 0;
+var galeryImages = [];
+imagesInd = 0;
 
 function leftImage(){
-    i --;
-    if( i <= 0 )
-        i = images.length - 1;
-    else if(i >= images.length)
-        i = 0
-    document.getElementById('galery').style.background = 'url(' +images[i]+')';
-    document.getElementById('galery').style.backgroundSize = 'cover';
+    imagesInd --;
+    if( imagesInd <= 0 )
+        imagesInd = galeryImages.length - 1;
+    else if(imagesInd >= galeryImages.length)
+        imagesInd = 0;
+	
+    setElStyleProp('galery','background','url(' +galeryImages[imagesInd]+')');
+    setElStyleProp('galery','backgroundSize','cover');
 }
 
 function rightImage(){
-     i ++;
-    if( i <= 0 )
-        i = images.length - 1;
-    else if(i >= images.length)
-        i = 0;
+     imagesInd ++;
+    if( imagesInd <= 0 )
+        imagesInd = galeryImages.length - 1;
+    else if(imagesInd >= galeryImages.length)
+        imagesInd = 0;
     
-    document.getElementById('galery').style.background = 'url(' +images[i]+')';
-    document.getElementById('galery').style.backgroundSize = 'cover';
+    setElStyleProp('galery','background','url(' +galeryImages[imagesInd]+')');
+    setElStyleProp('galery','backgroundSize','cover');
 }
 
 document.onkeydown = function( evt ) {
     evt = evt || window.event;
-
     if ( evt.keyCode === 27 ){
        hideGalery()
     }
-}
-
-function hideGalery() {
-    document.getElementById( 'modal' ).style.display = 'none';
-    document.getElementById( 'leftGalery' ).style.display = 'none';
-    document.getElementById( 'rightGalery' ).style.display = 'none';
-    document.getElementById( 'galery' ).style.display = 'none';
-    document.body.style.overflow = '';
 }
 
 
@@ -182,51 +233,77 @@ function pageTabOnClick(page) {
 	xhr.send();
 }
 
-function getStories(){      
-    var stories = [];
-    var xhr= new XMLHttpRequest();
-    xhr.open('GET', "http://localhost:8080/story.php", true);
-    xhr.onreadystatechange= function() {
-    if (this.readyState!==4) return;
-    if (this.status!==200) return;
-    stories = JSON.parse(this.response).story;
-    var txt = "";
-    for(i=0; i<stories.length; i++){
-        txt += "<div class=\"row yourstory\"><div class=\"yourStoryCaption\" id=\"yourStoryCaption\">"+ stories[i].title +"</div>"+
-        "<div class=\"yourStoryContent\" id=\"yourStoryContent\">"+stories[i].text +"</div>"+
-        "<input type=\"button\" class=\"readMore\" onclick=\"showMore()\" value=\"read more\"/>" +
-        "<div class=\"yourStoryLine\"><div class=\"rating\"><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>"+  
-            "</div></div></div>";
-     }     
-     document.getElementById('yourStories').innerHTML = txt;                
-    };	
-    xhr.send();	    
+function makeGet(postfix, params, _callback){
+	var xhr= new XMLHttpRequest();
+	var url = defaultRoute + postfix;
+	showLoadingPanel();
+	
+	if(params != '')
+		url += "?" + params;
+	
+	xhr.open('GET', url, true);
+	
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200) {
+			var response = JSON.parse(this.response);
+
+			_callback(response);
+			hideLoadingPanel();
+		}
+	};
+ 	xhr.send();	
+}
+
+
+function getStories(){ 
+	makeGet("story.php",'',function(stories){
+		  var txt = "";
+		for(i=0; i<stories.length; i++){
+			txt += "<div class=\"row yourstory\"><div class=\"yourStoryCaption\" id=\"yourStoryCaption\">"+ stories[i].Title +"</div>"+
+			"<div class=\"yourStoryContent\" id=\"yourStoryContent\">"+stories[i].Text +"</div>"+
+			"<input type=\"button\" class=\"readMore\" onclick=\"showMore()\" value=\"read more\"/>" +
+			"<div class=\"yourStoryLine\"><div class=\"rating\"><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>"+  
+				"</div></div></div>";
+		 }     
+		document.getElementById('yourStories').innerHTML = txt;   		
+	})   
 }
 
 function getHistories(){      
-    var stories = [];
-    var xhr= new XMLHttpRequest();
-    xhr.open('GET', "http://localhost:8080/historyStories.php", true);
-    xhr.onreadystatechange= function() {
-    if (this.readyState!==4) return;
-    if (this.status!==200) return;
-    stories = JSON.parse(this.response).story;
-    var txt = "<div class=\"hyStoryCaption\">New</div>";
-    for(i=0; i<stories.length; i++){
-        txt = "<div class=\"row storyItem\" id='storyItem" + i +"' onclick=\"openHistory('"+stories.indexOf(stories[i])+"')\"><img class=\"row storyImg\" id='storyImg"+i+"'/>"+
-        "<div id='storyText" +i+"' class=\"row storyText\">"+ stories[i].text +"</div></div>";
-		var z = document.createElement('div');
-		z.innerHTML = txt;
-		document.getElementById('hystorySideBar').appendChild(z);
-		document.getElementById('storyImg'+ i).src =stories[i].images.image.split('","')[0].replace('["','').replace('"]','');
-     }               
-    };	
-    xhr.send();	    
+   
+	makeGet("historyStories.php",'',function(stories){
+		var txt = "<div class=\"hyStoryCaption\">New</div>";
+		for(i=0; i<stories.length; i++){
+			txt = "<div class=\"row storyItem\" id='storyItem" + i +"' onclick=\"openHistory('"+stories.indexOf(stories[i])+"')\"><img class=\"row storyImg\" id='storyImg"+i+"'/>"+
+			"<div id='storyText" +i+"' class=\"row storyText\">"+ stories[i].text +"</div></div>";
+			var z = document.createElement('div');
+			z.innerHTML = txt;
+			getElementById('hystorySideBar').appendChild(z);
+			setSrc('storyImg'+ i,stories[i].Image);
+		 }        
+	})   
 }
 
 function openHistory(i){
-	document.getElementById('hystoryImg').src = document.getElementById('storyImg'+i).src
-	document.getElementById('hystoryContent').innerHTML = document.getElementById('storyText'+i).innerHTML;
+	setSrc('hystoryImg', getSrc('storyImg'+i));
+	setElInnerHtml('hystoryContent', getElInnerHtml('storyText'+i));
+}
+
+function makeArticles(stories, filter){
+	var column = 'one';
+	for(i=0; i<stories.length; i++){
+		if(i%5 == 0){
+			column = 'two';
+			txt = "<div class=\"column "+column+" newsItem\"><img class=\"row newsImg\" id='newsImg"+i +"'/>"+
+			"<div class=\"row storyText\">"+ stories[i].text +"</div></div>";
+			var z = document.createElement('div');
+			z.innerHTML = txt;
+			getElementById('storyGalery').appendChild(z);
+			setSrc('newsImg'+ i,stories[i].Image);
+		}		
+		if(i == 5 && !filter)
+			break;
+	}    
 }
 
 function getNews(){ 
@@ -236,93 +313,34 @@ function getNews(){
 	if (event.keyCode == 13)
 			filter();
 	});
-		
-    var stories = [];
-    var xhr= new XMLHttpRequest();
-    xhr.open('GET', "http://localhost:8080/newsStories.php", true);
-    xhr.onreadystatechange= function() {
-		if (this.readyState!==4) return;
-		if (this.status!==200) return;
-		stories = JSON.parse(this.response).story;
+
+	makeGet("newsStories.php",'',function(stories){
 		var txt = "<div class=\"hyStoryCaption\">New</div>";
 		for(i=0; i<stories.length; i++){
 			txt = "<div class=\"row storyItem\"><img class=\"row storyImg\" id='storyImg"+i +"'/>"+
-			"<div class=\"row storyText\">"+ stories[i].text +"</div></div>";
+			"<div class=\"row storyText\">"+ stories[i].Text +"</div></div>";
 			var z = document.createElement('div');
 			z.innerHTML = txt;
-			document.getElementById('hystorySideBar').appendChild(z);
-			document.getElementById('storyImg'+ i).src = stories[i].images.image.split('","')[0].replace('["','').replace('"]','');
+			getElementById('hystorySideBar').appendChild(z);
+			setSrc('storyImg'+ i, stories[i].Image);
 		 }     
-		txt = "";
-		for(i=0; i<stories.length; i++){
-			if(i==0 || i==5){
-				txt = "<div class=\"column two newsItem\"><img class=\"row newsImg\" id='newsImg"+i +"'/>"+
-				"<div class=\"row storyText\">"+ stories[i].text +"</div></div>";
-				var z = document.createElement('div');
-				z.innerHTML = txt;
-				document.getElementById('storyGalery').appendChild(z);
-				document.getElementById('newsImg'+ i).src = stories[i].images.image.split('","')[0].replace('["','').replace('"]','');
-			}
-			else {
-				txt = "<div class=\"column one newsItem\"><img class=\"row newsImg\" id='newsImg"+i +"'/>"+
-				"<div class=\"row storyText\">"+ stories[i].text +"</div></div>";
-				var z = document.createElement('div');
-				z.innerHTML = txt;
-				document.getElementById('storyGalery').appendChild(z);
-				document.getElementById('newsImg'+ i).src = stories[i].images.image.split('","')[0].replace('["','').replace('"]','');
-			}
-			if(i == 5)
-				break;
-		}
-    };	
-    xhr.send();	    
-}
-
-function filterArray(arr){		
-	var filt = document.getElementById("search").value;
-	var retArr = [];
-	for(i=0; i<arr.length; i++){
-		if(arr[i].newscategory=="news" &&(arr[i].text.indexOf(filt)!=-1 || arr[i].title.indexOf(filt)!=-1))
-			retArr.push(arr[i]);
-	}	
-	return retArr;
+		
+		makeArticles(stories,false);
+	});	
 }
 
 function filter(){
-	var filt = document.getElementById("search").value;
+	var filt = getElValue("search");
+	
 	if(filt == "")
 		return;
+	
+	
 	document.getElementById('storyGalery').innerHTML = "";
-	var stories = [];
-    var xhr= new XMLHttpRequest();
-    xhr.open('GET', "http://localhost:8080/news.php", true);
-    xhr.onreadystatechange= function() {
-		if (this.readyState!==4) return;
-		if (this.status!==200) return;
-		stories = JSON.parse(this.response).story;
-		var txt = "<div class=\"hyStoryCaption\">New</div>";
-		
-		stories = filterArray(stories );
-		
-		txt = "";
-		for(i=0; i<stories.length; i++){
-			if(i%5==0){
-				txt = "<div class=\"column two newsItem\"><img class=\"row newsImg\" id='newsImg"+i +"'/>"+
-				"<div class=\"row storyText\">"+ stories[i].text +"</div></div>";
-				var z = document.createElement('div');
-				z.innerHTML = txt;
-				document.getElementById('storyGalery').appendChild(z);
-				document.getElementById('newsImg'+ i).src = stories[i].images.image.split('","')[0].replace('["','').replace('"]','');
-			}
-			else {
-				txt = "<div class=\"column one newsItem\"><img class=\"row newsImg\" id='newsImg"+i +"'/>"+
-				"<div class=\"row storyText\">"+ stories[i].text +"</div></div>";
-				var z = document.createElement('div');
-				z.innerHTML = txt;
-				document.getElementById('storyGalery').appendChild(z);
-				document.getElementById('newsImg'+ i).src = stories[i].images.image.split('","')[0].replace('["','').replace('"]','');
-			}
-		}
-	}
-	xhr.send();	 
+	
+	var query = "filter="+ filt;
+	
+	makeGet("filterNews",query,function(response){
+		makeArticles(response,true);
+	})
 }

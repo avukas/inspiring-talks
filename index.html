@@ -69,19 +69,19 @@
 			<input type="text" id="storyTitle" class="storyTitle" placeholder="Story title">
 			<div>                    
 				<select class="storySelect" id="categorySelect">                          
-				  <option value="" disabled selected>Story category</option>
-				  <option value="bussiness">Bussiness</option>
-				  <option value="politics">Politics</option>
-				  <option value="art">Art</option>
-				  <option value="technology">Technology</option>
+				  <option value="0" disabled selected>Story category</option>
+				  <option value="1">Bussiness</option>
+				  <option value="2">Politics</option>
+				  <option value="3">Art</option>
+				  <option value="4">Technology</option>
 				</select> 
 				<select class="storySelect" id="newsCategory">
-				  <option value="" disabled selected>News category</option>
-				  <option value="history">History</option>
-				  <option value="news">News</option>
+				  <option value="0" disabled selected>News category</option>
+				  <option value="1">History</option>
+				  <option value="2">News</option>
 				</select>
 				<form class="storyForm">
-					<input type="file" id="fileupload" onchange="uploadedImages()" name="pic" accept="image/*" multiple>
+					<input type="file" id="fileupload" onchange="displayUploadedImages()" name="pic" accept="image/*" multiple>
 					<div id="selectedImages"></div>
 				</form>
 			</div>            
