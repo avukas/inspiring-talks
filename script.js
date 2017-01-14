@@ -550,7 +550,7 @@ function leaveEditUserInfo(elID, action){
 		value : getElValue(elID+"edit"),
 		userId : getElInnerHtml("userId")
 	}
-	makePost("editUserInfo",obj,function(){
+	makePost("editUserInfo.php",obj,function(){
 		var editableText = getElementById(elID+"edit");	
 		var divHtml =  document.createElement('div');
 		divHtml.className  = "row uInfo";
