@@ -19,6 +19,7 @@ function connect($table) {
 		$sql = "SELECT  s.*, i.Image FROM inspiringtalks.story s, inspiringtalks.storyimages i WHERE i.StoryId = s.StoryId
 		and i.StoryImageId = (SELECT StoryImageId from inspiringtalks.storyimages 
 													where StoryId = s.StoryId LIMIT 1) and NewsTypeId = 1 LIMIT 10";
+													
 		
 		$result = $conn->query($sql);
 		

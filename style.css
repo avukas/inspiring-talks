@@ -113,7 +113,7 @@
 
 .Img {
     background: url(http://www.mycustomer.com/sites/all/themes/pp/img/default-user.png);
-    background-size: contain;
+    background-size: cover !important;
     z-index: 9999;
     position: relative;
     -webkit-border-radius: 50%;
@@ -126,7 +126,6 @@
     border: 0px solid #FFF;
     margin: auto;
     cursor: pointer;
-    background-size: cover;
     width:150px;
     height:150px;
     position: relative;
@@ -156,8 +155,8 @@
 .yourStoryContent{
     font-size: x-small;
     color: #474747;
-    min-height:15%;
-    max-height: 15%;
+    min-height:15%;	
+    max-height:15%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: pre-line;
@@ -238,7 +237,8 @@
 
 .storyText{
    font-size: x-small;
-    width: 50%;
+    width: 98%;
+	max-height: 20px;
     height: 10%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -248,6 +248,21 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.sidebarText{
+   font-size: x-small;
+    width: 50%;
+	max-height: 20px;
+    height: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    margin-left: 5px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 .history{
     color: #474747;;
@@ -435,14 +450,16 @@
     left: 10%;
     right: 10%;
     bottom: 10%;
-    background-image: url(https://durhamcountylibrary.org/exhibits/dcrhp/images/cr037.jpg);
     height: 80%;
     width: 80%;
-    background-size: cover;
+    background-color:black;
     z-index: 999;
     display: none;
 }
-
+.galeryImg{
+	height: 100%;
+    width: auto;
+}
 
 #rightGalery{
     position: absolute;
@@ -564,7 +581,6 @@ textarea:focus,select:focus, input:focus{
     .smallImg {
         display: block;
         background: url(http://www.mycustomer.com/sites/all/themes/pp/img/default-user.png);
-        background-size: contain;
         z-index: 9999;
         position: relative;
         -webkit-border-radius: 50%;
@@ -577,7 +593,7 @@ textarea:focus,select:focus, input:focus{
         border: 0px solid #FFF;
         margin: auto;
         cursor: pointer;
-        background-size: cover;
+        background-size: cover !important;;
         width:150px;
         height:150px;
         position: relative;
@@ -587,6 +603,16 @@ textarea:focus,select:focus, input:focus{
     .smallImg:hover{
         opacity: 0.5;
     }
+	
+	#loading-image{
+		
+		width:100%;
+		height:auto;	
+	}
+	
+	.fa-3x {
+		font-size: 2em;
+	}
 }
 
 
@@ -615,21 +641,16 @@ textarea:focus,select:focus, input:focus{
 #loading {
    width: 100%;
    height: 100%;
-   top: 0;
-   left: 0;
    position: fixed;
    display: none;
    opacity: 0.7;	
    background-color: #fff;
-   z-index: 99;
+   z-index: 99999;
    text-align: center;
 }
 
 #loading-image {
-  position: absolute;
-  top: 100px;
-  left: 240px;
-  z-index: 100;
+	z-index: 99999;
 }
 
 .uploadedImages{
@@ -639,3 +660,80 @@ textarea:focus,select:focus, input:focus{
 	margin-bottom:5px; 
 	border:1px solid lightgrey;
 }
+
+.story-delete{
+	color: burlywood;
+	cursor: pointer;
+	float: left;
+}
+.edit-story{
+	cursor: pointer;
+	float: right;
+}
+
+.avatar{
+	width:100%;
+}
+
+
+.loginInput:focus{
+     width: 100%;
+    border: none;
+    background-color: ebf1f7;
+    outline: none;    
+}
+
+.loginInput {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 130px;
+    box-sizing: border-box;
+    border: none;
+    font-size: small;    
+    background-color: white;
+    background-size: contain;
+    margin-bottom: 7px;
+    border: 1px solid lightgray;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+}
+
+
+.uInfo{
+	font-size:12px;
+	width:100%;
+	min-height: 19%;
+	height:inherit;
+	cursor:text;
+}
+
+.save-icon{
+	float:right; 
+	display:none;
+	margin-right:3%;
+	margin-top:2%;
+	cursor: pointer;
+	font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hidden{
+	display:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

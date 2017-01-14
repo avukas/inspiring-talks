@@ -1,0 +1,18 @@
+-prebacivanje na mysql,
+-refactoring .js koda
+-funkcionalni loading panel
+-upload profilne slike
+-edit delete story-a
+-login
+-edit informacija o useru (klik na prostor ispod informacija o korisniku ispod profilne slike, klik van prostora sacuva informacije)
+-ucitavanje prica trenutno logiranog korisnikak na profilu, a ne tuđih
+-log out
+-pdf report
+-deserijalizacija iz xml i save na sql
+-ucitavanje galerije iz pravih podataka
+-korekcija stretch-a na slikama na galeriji
+-klikom na pricu na histoty tabu, ucita se kliknuta prica
+-klikom na pricu na news tabu se prosiri prica na veliku kolonu i ucita se tekst tako da se moze procitati, 
+	slijedecim klikom se smanji na pocetnu sirinu
+-serverska validacija pri save-u prica
+-sve ostale stvari koje su se trebale odraditi u spirali

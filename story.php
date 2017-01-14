@@ -5,6 +5,10 @@ function connect($table) {
     return $c;
 }
 
+function IsNullOrEmptyString($question){
+    return (!isset($question) || trim($question)==='');
+}
+
 
 function assocArrayToXML($root_element_name,$ar)
 {
@@ -52,49 +56,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (mysqli_connect_errno($conn)) {
 		echo "Connection failed: " . mysqli_connect_errno();
 	} 	
-	$sql = "INSERT INTO inspiringtalks.story (title,text,storytypeid,newstypeid) VALUES ('$data->title','$data->text',
-	$data->storytypeid,$data->newstypeid)";
-
-	if (!mysqli_query($conn,$sql))
-	  {
-		echo 'Error: ' . mysqli_error($conn);
-	  }
 	
-	$storyId = mysqli_insert_id($conn);
-
-	insertImages(json_decode($data->images),$storyId);
-
-	mysqli_close($conn);
-	echo "ok";
-}
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-	$json = file_get_contents('php://input');
-	$data = json_decode($json,true);
-
-	// Create connection
-	$conn = connect("inspiringtalks.story");
-	// Check connection
-	if ($conn->connect_error) {
-		echo "Connection failed: " . $conn->connect_error;
-	} 	
-
-	mysqli_query($conn,"UPDATE inspiringtalks.story set title = $data->title, text = $data->text,storytypeid = $data->storytypeid, newstypeid = $data->newstypeid) WHERE storyid = $data->storyid");
-	
-	mysqli_query($conn,"DELETE inspiringtalks.storyimages WHERE storyid = $data->storyid");
-	
-	insertImages($data->stories, $data->storyid); 
+	if(IsNullOrEmptyString($data->title) || IsNullOrEmptyString($data->text) || !isset($data->newstypeid) || !isset($data->storytypeid) || !isset($data->images) ){
+		echo "Invalid data. Please fill empty fields!";
+		return;
+	}
+	if($data->storyid == -1){
 		
-	$storyId = mysqli_insert_id($conn);
+		$sql = $conn->prepare('INSERT INTO inspiringtalks.story (title,text,storytypeid,newstypeid, userid) VALUES (?,?,?,?,?)');
+		
+		$sql->bind_param('ssiii', $data->title,$data->text,$data->storytypeid,$data->newstypeid, $data->userId);
+		
+		$sql->execute();
+	
+		echo 'Error: ' . mysqli_error($conn) . $data->userId;
+				
+		
+		$storyId = mysqli_insert_id($conn);
 
-	insertImages($data->images,$storyId);
+		insertImages(json_decode($data->images),$storyId);
+	}
+	else{
+		$sql = $conn->prepare('DELETE FROM inspiringtalks.storyimages where StoryId = ?');
+		
+		$sql->bind_param('i', $data->storyid);
+		
+		$sql->execute();
+		
+		$sql = $conn->prepare('UPDATE inspiringtalks.story set Title = ?,Text = ?,
+		StoryTypeId = ?, NewsTypeID = ? WHERE StoryId = ?');
+		
+		$sql->bind_param('ssiii', $data->title,$data->text,$data->storytypeid,$data->newstypeid,$data->storyid );
+		
+		$sql->execute();
+				
+		echo 'Error: ' . mysqli_error($conn);
+		
+		insertImages(json_decode($data->images),$data->storyid);
+	}
 
 	mysqli_close($conn);
 	echo "ok";
 }
-
-
 else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	// Create connection
 	$conn = connect('inspiringtalks.story');
@@ -102,12 +105,17 @@ else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	if (mysqli_connect_errno($conn)) {
 		echo "Connection failed: " . mysqli_connect_errno();
 	} 
-
-	$sql = "SELECT  s.*, i.Image FROM inspiringtalks.story s, inspiringtalks.storyimages i WHERE i.StoryId = s.StoryId
-	 and i.StoryImageId = (SELECT StoryImageId from inspiringtalks.storyimages 
-													where StoryId = s.StoryId LIMIT 1)";
-	$result = $conn->query($sql);
+	$userId =  $_GET['userId'];
 	
+	$query = $conn->prepare('SELECT  s.*, i.Image FROM inspiringtalks.story s, inspiringtalks.storyimages i WHERE i.StoryId = s.StoryId 
+	and userId = ? and i.StoryImageId = (SELECT StoryImageId from inspiringtalks.storyimages where StoryId = s.StoryId LIMIT 1)');
+	
+	$query->bind_param('i', $userId);
+	
+	$query->execute();
+	echo mysqli_error($conn);
+	
+	$result = $query->get_result();
 
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
@@ -119,25 +127,4 @@ else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	echo json_encode($new_array);	
 }	
 
-if(isset($_POST['delete'])) {
-	$conn = connect('inspiringtalks.story');
-
-	if(! $conn ) {
-	   die('Could not connect: ' . mysqli_error());
-	}
-
-	$story_id = $_POST['syoryid'];
-
-	$sql = "DELETE FROM inspiringtalks.story WHERE storyid = $story_id DELETE FROM inspiringtalks.storyimages WHERE storyid = $story_id";
-
-	$retval = mysqli_query( $conn, $sql );
-
-	if(! $retval ) {
-	   echo 'Could not delete data: ' + mysqli_error();
-	}
-
-	echo "Story deleted successfully\n";
-
-	mysqli_close($conn);
-}
 ?>
