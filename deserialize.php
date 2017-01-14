@@ -1,9 +1,9 @@
 <?php
 
 function connect($table) {
-    $c = mysqli_connect("localhost:3306", "root", "adi01234","inspiringtalks");
-    return $c;
-}	
+		$c = mysqli_connect(getenv('MYSQL_SERVICE_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), getenv('MYSQL_DATABASE'));
+		return $c;
+	}	
 	function insertImages($images, $storyId) {
 		$c = connect('inspiringtalks.storyimages');
 		$query = "INSERT INTO inspiringtalks.storyimages (storyid,image) values";	
