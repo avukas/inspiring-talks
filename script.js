@@ -1,5 +1,5 @@
 ﻿
-var defaultRoute = "http://localhost:8080/";
+var defaultRoute = "http://inpiring-talks-inspiring-talks.44fs.preview.openshiftapps.com/";
 
 window.onload = logedIn();
 
