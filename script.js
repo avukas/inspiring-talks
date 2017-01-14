@@ -333,14 +333,16 @@ function makeDelete(postfix, params, _callback){
 function getStories(){ 
 	makeGet("story.php",'userId='+parseInt(getElInnerHtml("userId")),function(stories){
 		  var txt = "";
-		for(i=0; i<stories.length; i++){
-			txt += "<div class=\"row yourstory\"><div class=\"yourStoryCaption\" id=\"yourStoryCaption\">"+ stories[i].Title +"<i class='fa fa-pencil edit-story' title='Edit story' onclick='editStory("+stories[i].StoryId+")'></i></div>"+
-			"<div class=\"yourStoryContent\" id='yourStoryContent"+i+"'>" + stories[i].Text +"</div>"+
-			"<input type=\"button\" class=\"readMore\" id='readmore"+i+"' onclick=\"showMore("+i+")\" value=\"read more\"/>" +
-			"<div class=\"yourStoryLine\"><div class=\"rating\"><i class='fa fa-trash story-delete' title='Delete story' onclick='deleteStory("+stories[i].StoryId+")'></i><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>"+  
-				"</div></div></div>";
-		 }     
-		document.getElementById('yourStories').innerHTML = txt;   		
+		  if(stories.length != 0){
+			for(i=0; i<stories.length; i++){
+				txt += "<div class=\"row yourstory\"><div class=\"yourStoryCaption\" id=\"yourStoryCaption\">"+ stories[i].Title +"<i class='fa fa-pencil edit-story' title='Edit story' onclick='editStory("+stories[i].StoryId+")'></i></div>"+
+				"<div class=\"yourStoryContent\" id='yourStoryContent"+i+"'>" + stories[i].Text +"</div>"+
+				"<input type=\"button\" class=\"readMore\" id='readmore"+i+"' onclick=\"showMore("+i+")\" value=\"read more\"/>" +
+				"<div class=\"yourStoryLine\"><div class=\"rating\"><i class='fa fa-trash story-delete' title='Delete story' onclick='deleteStory("+stories[i].StoryId+")'></i><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>"+  
+					"</div></div></div>";
+			 }     
+			document.getElementById('yourStories').innerHTML = txt;  
+		  } 		
 	})   
 }
 
@@ -348,18 +350,20 @@ function getHistories(){
    
 	makeGet("historyStories.php",'',function(stories){
 		var txt = "<div class=\"hyStoryCaption\">New</div>";
-		for(i=0; i<stories.length; i++){
-			txt = "<div class=\"row storyItem\" id='storyItem" + i +"' onclick=\"openHistory('"+i+"')\"><img class=\"row storyImg\" id='storyImg"+i+"'/>"+
-			"<div id='storyText" +i+"' class=\"row sidebarText\"><input  style='display:none;' id='storyInput" +i+"' value = '"+ stories[i].StoryId +"' />"+ stories[i].Text +"</div></div>";
-			var z = document.createElement('div');
-			z.innerHTML = txt;
-			getElementById('hystorySideBar').appendChild(z);
-			setSrc('storyImg'+ i,stories[i].Image);
-		 }   
+		if(stories.length != 0){
+			for(i=0; i<stories.length; i++){
+				txt = "<div class=\"row storyItem\" id='storyItem" + i +"' onclick=\"openHistory('"+i+"')\"><img class=\"row storyImg\" id='storyImg"+i+"'/>"+
+				"<div id='storyText" +i+"' class=\"row sidebarText\"><input  style='display:none;' id='storyInput" +i+"' value = '"+ stories[i].StoryId +"' />"+ stories[i].Text +"</div></div>";
+				var z = document.createElement('div');
+				z.innerHTML = txt;
+				getElementById('hystorySideBar').appendChild(z);
+				setSrc('storyImg'+ i,stories[i].Image);
+			 }   
 
-		setElInnerHtml("hystoryContent", stories[0].Text);
-		setElValue("galeryId", getElValue("storyInput0") );
-		setSrc("hystoryImg", stories[0].Image);
+			setElInnerHtml("hystoryContent", stories[0].Text);
+			setElValue("galeryId", getElValue("storyInput0") );
+			setSrc("hystoryImg", stories[0].Image);
+		}
 	})   
 }
 
@@ -401,16 +405,18 @@ function getNews(){
 
 	makeGet("newsStories.php",'',function(stories){
 		var txt = "<div class=\"hyStoryCaption\">New</div>";
-		for(i=0; i<stories.length; i++){
-			txt = "<div class=\"row storyItem\"><img class=\"row storyImg\" id='storyImg"+i +"'/>"+
-			"<div class=\"row sidebarText\">"+ stories[i].Title +"</div></div>";
-			var z = document.createElement('div');
-			z.innerHTML = txt;
-			getElementById('hystorySideBar').appendChild(z);
-			setSrc('storyImg'+ i, stories[i].Image);
-		 }     
-		
-		makeArticles(stories,false);
+			if(stories.length != 0){
+			for(i=0; i<stories.length; i++){
+				txt = "<div class=\"row storyItem\"><img class=\"row storyImg\" id='storyImg"+i +"'/>"+
+				"<div class=\"row sidebarText\">"+ stories[i].Title +"</div></div>";
+				var z = document.createElement('div');
+				z.innerHTML = txt;
+				getElementById('hystorySideBar').appendChild(z);
+				setSrc('storyImg'+ i, stories[i].Image);
+			 }     
+			
+			makeArticles(stories,false);
+		}
 	});	
 }
 

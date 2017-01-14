@@ -25,6 +25,8 @@ function connect($table) {
 	    $json = json_encode($xml);   
 		$data = json_decode($json);
 		
+		echo $json;
+		
 		$sql = $conn->prepare('INSERT INTO inspiringtalks.story (title,text,storytypeid,newstypeid, userid) VALUES (?,?,?,?,?)');	
 		$sql->bind_param('ssiii', $data->title,$data->text,$data->storytypeid,$data->newstypeid, $data->userid);	
 		
