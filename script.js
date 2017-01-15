@@ -273,6 +273,7 @@ function pageTabOnClick(page) {
 		document.body.innerHTML= this.responseText;
         if(page == "index.php"){
             getStories();
+			getUser();
         }else  if(page == "History.php"){
             getHistories();		
         }else  if(page == "News.php"){
@@ -520,13 +521,14 @@ function widenArticle(articleId){
 
 function logedIn(){
 	makeGet("getUser.php","userId="+parseInt(getElInnerHtml("userId")),function(response){
-		setElInnerHtml("Info",response.Info.replace(/\n/g, '<br/>'));
-		setElInnerHtml("Education", response.Education.replace(/\n/g, '<br/>'));
-		setElInnerHtml("Employment",response.Employment.replace(/\n/g, '<br/>'));
-		setElInnerHtml("Hobies",response.Hobies.replace(/\n/g, '<br/>'));
-		setElStyleProp("profile-pic","background","url(" + response.ProfileImage + ")");
-		setElStyleProp("smallImg","background","url(" + response.ProfileImage + ")");
-		getStories();
+			setElInnerHtml("Info",response.Info.replace(/\n/g, '<br/>'));
+			setElInnerHtml("Education", response.Education.replace(/\n/g, '<br/>'));
+			setElInnerHtml("Employment",response.Employment.replace(/\n/g, '<br/>'));
+			setElInnerHtml("Hobies",response.Hobies.replace(/\n/g, '<br/>'));
+			setElStyleProp("profile-pic","background","url(" + response.ProfileImage + ")");
+			setElStyleProp("smallImg","background","url(" + response.ProfileImage + ")");
+			getStories();
+		
 	})
 }
 
