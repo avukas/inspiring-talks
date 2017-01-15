@@ -556,7 +556,7 @@ function leaveEditUserInfo(elID, action){
 		var divHtml =  document.createElement('div');
 		divHtml.className  = "row uInfo";
 		divHtml.id = elID;
-		divHtml.innerHTML = editableText.textContent.replace(/\n/g, '<br/>');
+		divHtml.innerHTML = editableText.value.replace(/\n/g, '<br/>');
 		divHtml.onclick = function(){ editUserInfo(elID); };	
 		editableText.replaceWith(divHtml);
 		
