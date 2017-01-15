@@ -272,8 +272,7 @@ function pageTabOnClick(page) {
 		
 		document.body.innerHTML= this.responseText;
         if(page == "index.php"){
-            getStories();
-			getUser();
+            logedIn();
         }else  if(page == "History.php"){
             getHistories();		
         }else  if(page == "News.php"){

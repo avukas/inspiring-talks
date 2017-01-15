@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	
 
 	$query = 'SELECT  u.FirstName,u.LastName,  st.Name, nt.Name, s.Title, s.Text 
-			  FROM inspiringtalks.story s, inspiringtalks.user u, inspiringtalks.StoryType st, inspiringtalks.NewsType nt 
+			  FROM inspiringtalks.story s, inspiringtalks.user u, inspiringtalks.storytype st, inspiringtalks.newstype nt 
 			  WHERE s.StoryTypeId = st.StoryTypeId AND s.NewsTypeId = nt.NewsTypeId AND u.UserId = s.UserId';
 	
 	$result = $conn->query($query);	
