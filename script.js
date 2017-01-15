@@ -577,7 +577,7 @@ function setProfilePic(){
 		}
 		setElStyleProp('profile-pic','background','url('+e.target.result+')')
 		setElStyleProp('smallImg','background','url('+e.target.result+')')
-		makePost("editUserInfo",obj,function(){})		
+		makePost("editUserInfo.php",obj,function(){})		
 	};       
 	FR.readAsDataURL( getElementById("profile-image-upload").files[0] );
 }
